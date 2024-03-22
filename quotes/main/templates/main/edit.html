@@ -1,0 +1,26 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}Редактируем заметку{% endblock %}
+{% block main %}
+    <div class="container">
+        <form id="newNote" class="newnote_content" method="POST" action="">
+            {% csrf_token %}
+            <label for="title" class="form-field__label">Заголовок</label>
+            <input id="title" type="text" class="form-field__input" name="title" value="{{ note.title }}"><br>
+            <div class="sql_info_note">
+                <label for="idMysql" class="form-field__label_id">ID</label>
+                <input id="idMysql" type="text" class="form-field__input_id" name="idMysql" value="{{ note.id }}" disabled><br>
+                <label for="dateMysql" class="form-field__label_id">Дата</label>
+                <input id="dateMysql" type="text" class="form-field__input_date" value="{{ note.date }}" name="dateMysql" disabled><br>
+            </div>
+            <label for="bodyNote" class="form-field__label">Заметка</label>
+            <textarea id="bodyNote" class="form-field__textarea" name="body">{{ note.body }}</textarea>
+            <button id="edit" type="submit" value="edit">Редактировать</button>
+            <button id="delete" type="submit" value="delete">Удалить</button>
+        </form>
+        <button id="json" class="json_button" value="json">Сохранить в JSON</button>
+        <button id="return" class="json_button" value="return">Вернуться в main</button>
+        <div id="noteSavings"></div>
+    </div>
+    <script src="{% static 'main/js/deletenote.js' %}"></script>
+{% endblock %}

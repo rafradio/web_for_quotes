@@ -1,0 +1,20 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}Form for new note{% endblock %}
+{% block main %}
+    <div class="container">
+        <form id="newNote" class="newnote_content" method="POST" action="">
+            {% csrf_token %}
+            <label for="title" class="form-field__label">Заголовок</label>
+            <input id="title" type="text" class="form-field__input" name="title"><br>
+            <label for="bodyNote" class="form-field__label">Заметка</label>
+            <textarea id="bodyNote" class="form-field__textarea" name="body"></textarea>
+            <br>
+            <input type="submit" value="Добавить" />
+        </form>
+        <button id="return" class="json_button" value="return">Вернуться в main</button>
+    </div>
+    <script src="{% static 'main/js/returntomain.js' %}" type="module"></script>
+{% endblock %}
+
+

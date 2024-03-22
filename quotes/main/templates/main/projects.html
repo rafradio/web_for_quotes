@@ -1,0 +1,36 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %}Projects{% endblock %}
+{% block styleMy %}
+    <link href="{% static 'main/css/input.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block main %}
+    <div class="container">
+        <div class="title_main"><h2>Список проектов</h2></div>
+        <div class="list_of_notes">
+            <fieldset>
+                <legend>Данные в БД</legend>
+                <input  autocomplete="off" role="combobox" list="" id="link" name="link" placeholder="Выберите id" class="db">
+                <datalist id="link_data" role="listbox">
+                    {% if projects %}
+                        {% for el in projects %}
+                            <option value="{{ el.link }}">{{ el.link }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </datalist>
+                <input  autocomplete="off" role="combobox" list="" id="title" name="title" placeholder="Выберите название проекта" class="db">
+                <datalist id="title_data" role="listbox">
+                    {% if projects %}
+                        {% for el in projects %}
+                            <option value="{{ el.title }}">{{ el.title }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </datalist>
+            </fieldset>
+        </div>
+        <div class="footer_main">
+               
+        </div>
+    </div>
+    <script src="{% static 'main/js/input.js' %}" type="module"></script>
+{% endblock %}

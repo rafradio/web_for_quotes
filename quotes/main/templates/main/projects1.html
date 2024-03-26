@@ -1,0 +1,22 @@
+{% load static %}
+<fieldset>
+    <legend>Данные в БД</legend>
+    <input class="db" autocomplete="off" role="combobox" list="" id="link" name="link" placeholder="Выберите id" >
+    <datalist class="db-datalist" id="link_data" role="listbox">
+        {% if data %}
+            {% for el in data %}
+                <option value="{{ el.link }}">{{ el.link }}</option>
+            {% endfor %}
+        {% endif %}
+    </datalist>
+    <input class="db" autocomplete="off" role="combobox" list="" id="title" name="title" placeholder="Выберите название проекта">
+    <datalist class="db-datalist" id="title_data" role="listbox">
+        {% if data %}
+            {% for el in data %}
+                <option value="{{ el.title }}">{{ el.title }}</option>
+            {% endfor %}
+        {% endif %}
+    </datalist>
+</fieldset>
+
+

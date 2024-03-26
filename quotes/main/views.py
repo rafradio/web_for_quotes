@@ -13,22 +13,38 @@ def index(request):
 def lofForm(request):
     # testUsers = TestUsers.objects.all()
     message = ""
+    visibility = "block"
+    visibility1 = "none"
+    form = LoginForm()
+    
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             testUser = TestUsers.objects.get(email=cd['username'])
-            # password = testUser.password
-            # print("Пароль - ", password)
-            if cd['password'] == testUser.password: return redirect('projects', pk="Allowed")
-            message = "Пароль введен правильно" if cd['password'] == testUser.password else "Пароль введен не правильно"
+            if cd['password'] == testUser.password: 
+                visibility = "none"
+                visibility1 = "flex"
+                # return redirect('projects', pk="Allowed")
+                message = "Пароль введен правильно" if cd['password'] == testUser.password else "Пароль введен не правильно"
+                testProjects = TestProjects.objects.all()
+                usersAll = TestUsers.objects.all()
+                data = {
+                    'data': testProjects,
+                    'users': usersAll,
+                    'message': message,
+                    'visibility': visibility,
+                    'visibility1': visibility1,
+                }
+                return render(request, 'main/login.html', data)
     else:
         pass
     
-    form = LoginForm()
-    data ={
-        'form': form,
-        'message': message
+    data = {
+        'data': form,
+        'message': message,
+        'visibility': visibility,
+        'visibility1': visibility1,
     }
     return render(request, 'main/login.html', data)
 

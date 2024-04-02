@@ -14,3 +14,5 @@ buttonForUser.onclick = () => {
 buttonDel.onclick = () => {
     listOfUsers.remove(listOfUsers.selectedIndex);
 }
+
+export {listOfUsers};

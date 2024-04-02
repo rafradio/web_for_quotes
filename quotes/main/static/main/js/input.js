@@ -64,3 +64,5 @@ fieldLink.forEach((el, index) => {
 //         fieldLink[0].style.borderRadius = "5px";
 //     }
 // };
+
+export {fieldLink};

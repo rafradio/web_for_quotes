@@ -1,6 +1,10 @@
-<fieldset>
+<fieldset class="flex-fieldset">
     <legend>Контрольная панель</legend>
-    <input class="db-new" id="new-link" name="link" placeholder="Имя проекта" type="text">
-    <input class="db-new" id="new-title" name="title" placeholder="Название" type="text">
+    <input class="db-new new-project" id="new-link" name="link" placeholder="ID проекта" type="text" disabled>
+    <input class="db-new new-project" id="new-title" name="title" placeholder="Название проекта" type="text" disabled>
+    <select class="db-new" id="gizmo" placeholder="Выберите ответственного">
+        <option value="sokolinskaya">sokolinskaya</option>
+        <option value="korenev">korenev</option>
+    </select>
     <div class="button-user" id="new-project"><p>Завести проект</p></div>
 </fieldset>

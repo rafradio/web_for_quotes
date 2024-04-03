@@ -15,6 +15,7 @@ def lofForm(request):
     message = ""
     visibility = "block"
     visibility1 = "none"
+    htmlTitle="Log-in"
     form = LoginForm()
     
     if request.method == 'POST':
@@ -25,7 +26,7 @@ def lofForm(request):
             if cd['password'] == testUser.password: 
                 visibility = "none"
                 visibility1 = "flex"
-                # return redirect('projects', pk="Allowed")
+                htmlTitle="Информация для квот"
                 message = "Пароль введен правильно" if cd['password'] == testUser.password else "Пароль введен не правильно"
                 testProjects = TestProjects.objects.all()
                 usersAll = TestUsers.objects.all()
@@ -33,16 +34,20 @@ def lofForm(request):
                     'data': testProjects,
                     'users': usersAll,
                     'message': message,
+                    'htmlTitle': htmlTitle,
                     'visibility': visibility,
                     'visibility1': visibility1,
                 }
                 return render(request, 'main/login.html', data)
+            else:
+                message = "Пароль введен не правильно"
     else:
         pass
     
     data = {
         'data': form,
         'message': message,
+        'htmlTitle': htmlTitle,
         'visibility': visibility,
         'visibility1': visibility1,
     }

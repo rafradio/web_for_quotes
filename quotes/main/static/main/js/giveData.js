@@ -4,9 +4,11 @@ import {listOfUsers} from "./userListAdd.js";
 let dataButton = document.getElementById("new-project");
 let gizmoHTML = document.getElementById("gizmo");
 let newProjectData = document.querySelectorAll(".new-project");
+let record = document.getElementById("stateMessage");
 
 
 dataButton.onclick = () => {
+    let messageFirst = "Начало работы с бд ";
     let getChoosenProject = document.querySelector('input[name="choose-project"]:checked'); 
     console.log("Выбранный проект - ", getChoosenProject.value, gizmoHTML.value);
     let dataToSend = {}
@@ -19,14 +21,14 @@ dataButton.onclick = () => {
         dataToSend = {
             link: fieldLink[0].value,
             title: fieldLink[1].value,
-            gizmo: 1,
+            gizmo: gizmoHTML.value,
             userList: userNames
         };
     } else {
         dataToSend = {
             link: newProjectData[0].value,
             title: newProjectData[1].value,
-            gizmo: 2,
+            gizmo: gizmoHTML.value,
             userList: userNames
         };
     }       
@@ -47,7 +49,9 @@ dataButton.onclick = () => {
             .then(response => response.json())
             .then(data => {
                 let dataString = data;
-                console.log(dataString.name);
+                console.log(dataString.records);
+                let message = "Вставлено записей - " + dataString.records
+                record.innerHTML = message
             });
     
     

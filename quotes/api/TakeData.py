@@ -1,4 +1,6 @@
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from main.models import TestQuotas
 
 class TakeData():
@@ -15,8 +17,15 @@ class TakeData():
         if args[0] == "korenev": self.url = data[1][:35] + args[1] + data[1][42:]
         
     def sentRequest(self):
-        # return True
-        r = requests.get(self.url)
+        session = requests.Session()
+        retries = Retry(total=5,
+                backoff_factor=0.3,
+                status_forcelist=[500, 502, 503, 504],
+                allowed_methods=frozenset(['GET', 'POST']))
+        session.mount('http://', HTTPAdapter(max_retries=retries))
+        session.mount('https://', HTTPAdapter(max_retries=retries))
+        r = session.get(self.url)
+        # r = requests.get(self.url)
         print(r.ok)
         if r.ok: 
             self.data = r.json()
@@ -42,7 +51,8 @@ class TakeData():
                 user_id=line[3])
             record.save()
         last1 = TestQuotas.objects.latest('id')
-        return int(last1.id) - int(last.id)
+        counter = int(last1.id) - int(last.id)
+        return counter, len(self.data['quotas'])
             
                 
     

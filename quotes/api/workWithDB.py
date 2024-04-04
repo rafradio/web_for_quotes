@@ -11,6 +11,6 @@ def sqlRequest(data):
         print(linkId.id)
         dt.createData(linkId.id, data['userList'])
         print("Длина вставляемых данных - ", len(dt.insertingData))
-        counter = dt.makeSQLInsert()
-        return counter
+        counter, fetched = dt.makeSQLInsert()
+        return counter, fetched
     

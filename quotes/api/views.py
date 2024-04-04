@@ -6,7 +6,7 @@ from .workWithDB import sqlRequest
 
 @api_view(['GET', 'POST'])
 def getData(request):
-    dictTest = {'records': 0}
+    dictTest = {'records': 0, 'fetched': 0}
     if request.method == 'POST':
         data = request.data
         testUser = TestUsers.objects.get(name=data['userList'][0])
@@ -16,8 +16,9 @@ def getData(request):
         # print("user = ", testUser.id)
         # print("user = ", testUserList)
         print("user = ", data['gizmo'])
-        counter = sqlRequest(data)
+        counter, fetched = sqlRequest(data)
         print("Вставлено - ", counter)
         dictTest['records'] = counter
+        dictTest['fetched'] = fetched
         
     return Response(dictTest)

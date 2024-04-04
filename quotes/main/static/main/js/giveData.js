@@ -6,9 +6,12 @@ let gizmoHTML = document.getElementById("gizmo");
 let newProjectData = document.querySelectorAll(".new-project");
 let record = document.getElementById("stateMessage");
 
-
-dataButton.onclick = () => {
+dataButton.onclick = function() {
+    dataButton.classList.add("disabledbutton");
+    // this.onclick = false;
     let messageFirst = "Начало работы с бд ";
+    record.style.color = "red";
+    record.innerHTML = messageFirst;
     let getChoosenProject = document.querySelector('input[name="choose-project"]:checked'); 
     console.log("Выбранный проект - ", getChoosenProject.value, gizmoHTML.value);
     let dataToSend = {}
@@ -49,9 +52,12 @@ dataButton.onclick = () => {
             .then(response => response.json())
             .then(data => {
                 let dataString = data;
-                console.log(dataString.records);
-                let message = "Вставлено записей - " + dataString.records
-                record.innerHTML = message
+                console.log(dataString.records, dataString.fetched);
+                let message = "Вставлено записей в БД - " + dataString.records + "; Записей на alchemy - " + dataString.fetched;
+                record.innerHTML = message;
+                record.style.color = "black";
+                dataButton.classList.remove("disabledbutton");
+                // dataButton.onclick = true;
             });
     
     

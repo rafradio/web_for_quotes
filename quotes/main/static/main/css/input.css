@@ -137,3 +137,7 @@ input[type=radio]:checked {
 .second-radio {
     margin-left: 40px;
 }
+.disabledbutton {
+    pointer-events: none;
+    cursor: not-allowed;
+}

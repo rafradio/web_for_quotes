@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import LoginForm
 from .models import TestUsers, TestProjects
+from .MyLogger import MyLogger
 from django.db import connection
 
 def index(request):
@@ -10,8 +11,12 @@ def index(request):
     print(myUsers[1].name)
     return HttpResponse("<h2>Hello world!</h2>")
 
-def lofForm(request):
+def logForm(request):
     # testUsers = TestUsers.objects.all()
+    MyLogger.configure()
+    clientip = f'{request.get_full_path()}; {request.headers["User-Agent"]}; {request.method};'
+    d = {'clientip': clientip}
+    MyLogger.logger.info('Start work', extra = d)
     message = ""
     visibility = "block"
     visibility1 = "none"
@@ -24,6 +29,9 @@ def lofForm(request):
             cd = form.cleaned_data
             testUser = TestUsers.objects.get(email=cd['username'])
             if cd['password'] == testUser.password: 
+                clientip = f'"Пароль введен верно"; {testUser.name}; {testUser.email}'
+                d = {'clientip': clientip}
+                MyLogger.logger.info('Password entering', extra = d)
                 visibility = "none"
                 visibility1 = "flex"
                 htmlTitle="Информация для квот"
@@ -41,6 +49,9 @@ def lofForm(request):
                 return render(request, 'main/login.html', data)
             else:
                 message = "Пароль введен не правильно"
+                clientip = f'"Пароль введен не правильно"; {testUser.name}; {testUser.email}'
+                d = {'clientip': clientip}
+                MyLogger.logger.info('Password entering', extra = d)
     else:
         pass
     

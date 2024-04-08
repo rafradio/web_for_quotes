@@ -7,40 +7,61 @@ let newProjectData = document.querySelectorAll(".new-project");
 let record = document.getElementById("stateMessage");
 
 dataButton.onclick = function() {
-    dataButton.classList.add("disabledbutton");
-    // this.onclick = false;
-    let messageFirst = "Начало работы с бд ";
-    record.style.color = "red";
-    record.innerHTML = messageFirst;
     let getChoosenProject = document.querySelector('input[name="choose-project"]:checked'); 
+
+    if (getChoosenProject == null) {
+        record.style.color = "rgb(159, 22, 129)";
+        record.innerHTML = "Вы не выбрали тип проекта."; 
+        return;
+    }
+
+
+    // dataButton.classList.add("disabledbutton");
+    // // this.onclick = false;
+    // let messageFirst = "Начало работы с бд ";
+    // record.style.color = "red";
+    // record.innerHTML = messageFirst; 
     console.log("Выбранный проект - ", getChoosenProject.value, gizmoHTML.value);
     let dataToSend = {}
 
     let userNames = [...listOfUsers.options].map(o => o.text);
-
-    if (getChoosenProject == null) {return;}
+    let userNamesUnique = [...new Set(userNames)];
 
     if (getChoosenProject.value == "old") { 
         dataToSend = {
             link: fieldLink[0].value,
             title: fieldLink[1].value,
             gizmo: gizmoHTML.value,
-            userList: userNames
+            userList: userNamesUnique,
+            typeOfProject: "old"
         };
     } else {
         dataToSend = {
             link: newProjectData[0].value,
             title: newProjectData[1].value,
             gizmo: gizmoHTML.value,
-            userList: userNames
+            userList: userNamesUnique,
+            typeOfProject: "new"
         };
-    }       
+    }      
+    
+    let isEmptyValues = false;
+    if (dataToSend.userList.length) {isEmptyValues = Object.values(dataToSend).every(x => x != null && x != '');}
+    // if (dataToSend.gizmo == '') {isEmptyValues = false;}
+    // if (dataToSend.link == '') {isEmptyValues = false;}
 
-        console.log(userNames);
+    console.log("Проверка полей - ", isEmptyValues, " массив - ", dataToSend.link);
 
-        let url = new URL(window.location.href);
-        url.pathname = "/getdata";
+    let url = new URL(window.location.href);
+    url.pathname = "/getdata";
 
+    dataButton.classList.add("disabledbutton");
+    // this.onclick = false;
+    let messageFirst = "Начало работы с бд ";
+    record.style.color = "red";
+    record.innerHTML = messageFirst; 
+
+    if (isEmptyValues) {
         fetch(url, {
             method: 'POST',
             headers: {
@@ -52,13 +73,20 @@ dataButton.onclick = function() {
             .then(response => response.json())
             .then(data => {
                 let dataString = data;
+                let message ="Вы выбрали неправильного исполнителя! "
                 console.log(dataString.records, dataString.fetched);
-                let message = "Вставлено записей в БД - " + dataString.records + "; Записей на alchemy - " + dataString.fetched;
+                if (dataString.message != 0) {
+                    message = "Вставлено записей в БД - " + dataString.records + "; Записей на alchemy - " + dataString.fetched;
+                }
                 record.innerHTML = message;
                 record.style.color = "black";
                 dataButton.classList.remove("disabledbutton");
-                // dataButton.onclick = true;
             });
+    } else {
+        record.style.color = "rgb(159, 22, 129)";
+        record.innerHTML = "Вы не выбрали все данные."; 
+
+    }
     
     
 }

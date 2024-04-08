@@ -96,6 +96,9 @@ option:hover,  .active{
     font-family: sans-serif;
     text-align: center;
 }
+.cp-button {
+    margin-top: 30px !important;
+}
 .button-user p {
     display: flex;
     font-size: 12px;
@@ -140,4 +143,16 @@ input[type=radio]:checked {
 .disabledbutton {
     pointer-events: none;
     cursor: not-allowed;
+}
+.db-new option {
+    font-size: 12px;
+}
+.select-prog {
+    margin-top: -10px;
+    display: flex;
+    position: relative;
+    height: 25px;
+    width: 250px;
+    color: red;
+    font-size: 12px;
 }

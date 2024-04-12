@@ -10,7 +10,7 @@
         <div class="list_of_notes">
             <div class="login-form" style="display: {{ visibility }};">
                 <p class="from-text">Пожалуйста используйте данную форму для входа:</p>
-                <form action="logintest" method="post">
+                <form action="" method="post">
                     {{ data.as_p }}
                     {% csrf_token %}
                     <input type="submit" value="Log-in">

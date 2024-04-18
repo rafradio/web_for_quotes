@@ -1,4 +1,4 @@
-import {fieldLink} from "./input.js";
+import {fieldLink, dataAllLinks} from "./input.js";
 import {listOfUsers} from "./userListAdd.js";
 
 let dataButton = document.getElementById("new-project");
@@ -46,7 +46,12 @@ dataButton.onclick = function() {
     }      
     
     let isEmptyValues = false;
-    if (dataToSend.userList.length) {isEmptyValues = Object.values(dataToSend).every(x => x != null && x != '');}
+    if (dataToSend.userList.length) {
+        isEmptyValues = Object.values(dataToSend).every(x => x != null && x != '');
+        if (dataToSend.typeOfProject == "old") {
+            isEmptyValues = ((dataAllLinks[0].indexOf(link) > -1) && (dataAllLinks[1].indexOf(title) > -1)) ? true : false;
+        }
+    }
     // if (dataToSend.gizmo == '') {isEmptyValues = false;}
     // if (dataToSend.link == '') {isEmptyValues = false;}
 

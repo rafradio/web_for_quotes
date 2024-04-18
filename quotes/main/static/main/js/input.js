@@ -32,6 +32,7 @@ fieldLink.forEach((el, index) => {
             let valueForNotherInput = dataAllLinks[anotherInput][dataAllLinks[index].indexOf(option.value)];
             fieldLink[anotherInput].value = valueForNotherInput;
             console.log("Hello - ", dataAllLinks[index].indexOf(option.value));
+            el.blur();
         }
     }
 
@@ -59,4 +60,4 @@ fieldLink.forEach((el, index) => {
 
 
 
-export {fieldLink};
+export {fieldLink, dataAllLinks};

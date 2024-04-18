@@ -1,7 +1,7 @@
 {% load static %}
 <fieldset class="flex-fieldset">
     <legend>Пользователи</legend>
-    <input class="db" autocomplete="off" role="combobox" list="" id="user-name" name="link" placeholder="Выберите имя" >
+    <input class="db" autocomplete="off" role="combobox" list="" id="user-name" name="link" placeholder="Выберете имя" >
     <datalist class="db-datalist" id="user-name-data" role="listbox">
         {% if users %}
             {% for el in users %}
@@ -9,7 +9,7 @@
             {% endfor %}
         {% endif %}
     </datalist>
-    <input class="db" autocomplete="off" role="combobox" list="" id="user-login" name="title" placeholder="Выберите логин">
+    <input class="db" autocomplete="off" role="combobox" list="" id="user-login" name="title" placeholder="Выберете логин">
     <datalist class="db-datalist" id="user-login-data" role="listbox">
         {% if users %}
             {% for el in users %}

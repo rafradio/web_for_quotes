@@ -149,10 +149,32 @@ input[type=radio]:checked {
 }
 .select-prog {
     margin-top: -10px;
+    margin-left: 10px;
     display: flex;
     position: relative;
     height: 25px;
     width: 250px;
     color: red;
-    font-size: 12px;
+    font-size: 10px;
 }
+#stateMessage {
+    display: inline-block;
+}
+.loader {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #242424;
+    border-bottom-color: #FF3D00;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 

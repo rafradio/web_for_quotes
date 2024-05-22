@@ -5,6 +5,14 @@ let dataButton = document.getElementById("new-project");
 let gizmoHTML = document.getElementById("gizmo");
 let newProjectData = document.querySelectorAll(".new-project");
 let record = document.getElementById("stateMessage");
+let programmer = document.querySelectorAll(".select-prog");
+let loader = document.createElement('span');
+loader.setAttribute("class", "loader");
+
+gizmoHTML.onchange = function() {
+    programmer[0].style.display = 'none';
+}
+
 
 dataButton.onclick = function() {
     let getChoosenProject = document.querySelector('input[name="choose-project"]:checked'); 
@@ -46,11 +54,14 @@ dataButton.onclick = function() {
     }      
     
     let isEmptyValues = false;
+    console.log("проверка isEmptyValues", dataToSend.userList.length);
     if (dataToSend.userList.length) {
         isEmptyValues = Object.values(dataToSend).every(x => x != null && x != '');
+        console.log("проверка isEmptyValues", isEmptyValues);
         if (dataToSend.typeOfProject == "old") {
-            isEmptyValues = ((dataAllLinks[0].indexOf(link) > -1) && (dataAllLinks[1].indexOf(title) > -1)) ? true : false;
+            isEmptyValues = ((dataAllLinks[0].indexOf(dataToSend.link) > -1) && (dataAllLinks[1].indexOf(dataToSend.title) > -1)) ? true : false;
         }
+        console.log("проверка isEmptyValues", isEmptyValues);
     }
     // if (dataToSend.gizmo == '') {isEmptyValues = false;}
     // if (dataToSend.link == '') {isEmptyValues = false;}
@@ -65,6 +76,7 @@ dataButton.onclick = function() {
     let messageFirst = "Начало работы с бд ";
     record.style.color = "red";
     record.innerHTML = messageFirst; 
+    record.appendChild(loader);
 
     if (isEmptyValues) {
         fetch(url, {
@@ -86,6 +98,7 @@ dataButton.onclick = function() {
                 record.innerHTML = message;
                 record.style.color = "black";
                 dataButton.classList.remove("disabledbutton");
+                programmer[0].style.display = 'block';
             });
     } else {
         record.style.color = "rgb(159, 22, 129)";

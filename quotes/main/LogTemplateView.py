@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
+import asyncio
 from django.http import HttpResponse
 from .forms import LoginForm
 from .models import TestUsers, TestProjects
 from .MyLogger import MyLogger
 from django.views.generic import TemplateView
+from asgiref.sync import sync_to_async
 
 class LogTemplateView(TemplateView):
     template_name = "main/login.html"
@@ -70,4 +72,6 @@ class LogTemplateView(TemplateView):
                 clientip = f'"Пароль введен не правильно"; {testUser.name}; {testUser.email}'
                 d = {'clientip': clientip}
                 MyLogger.logger.info('Password entering', extra = d)
+                context['message'] = message
         return render(request, self.template_name, context)
+    

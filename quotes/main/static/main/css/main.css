@@ -21,6 +21,7 @@ body {
     height: 650px;
     width: 700px;  
     border: 0.2px solid black;
+    
 }
 #newNote {
     display: flex;
@@ -57,7 +58,8 @@ body {
     width: 100%;
     height: 80%;
     border: 0.2px solid black;
-    overflow: hidden;
+    z-index: 1;
+    /* overflow: hidden; */
     /* overflow-y: scroll; */
 }
 .login-form {

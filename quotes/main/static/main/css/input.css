@@ -169,6 +169,7 @@ input[type=radio]:checked {
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
+    margin-right: 20px;
 }
 @keyframes rotation {
     0% {
@@ -178,3 +179,57 @@ input[type=radio]:checked {
         transform: rotate(360deg);
     }
 } 
+.tab-area {
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: -20px;
+    z-index: 99;
+    width: 220px;
+    height: 20px;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 5px;
+    background: transparent;
+}
+.tab-element {
+    display: flex;
+    position: relative;
+    width: 35%;
+    height: 100%;
+    border-radius: 3px 3px 0 0;
+    border-top: 2px solid rgb(133, 133, 133);
+    margin-right: 10px;
+    cursor: pointer;
+    background: #ececec;
+}
+.tab-element::before, .tab-element::after {
+    content: "";
+    height: 100%;
+    position: absolute;
+    border-radius: 3px 3px 0 0;
+    width: 10px;
+    top: 0;
+}
+.tab-element::before {
+    right: -2px;
+    transform: skew(5deg);
+    border-radius: 0 5px 0 0;
+    border-right: 2px solid rgb(133, 133, 133);
+
+}
+.tab-element::after {
+    left: -2px;
+    transform: skew(-5deg);
+    border-left: 2px solid rgb(133, 133, 133);
+    border-radius: 5px 0 0 0;
+}
+.tab-element:nth-child(1) {
+    z-index: 10;
+    height: 105%;
+    border-bottom: transparent;
+}
+.tab-element:nth-child(2) {
+    z-index: 0;
+    border-bottom: 0.2px solid rgb(133, 133, 133);
+}

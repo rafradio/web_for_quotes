@@ -76,7 +76,8 @@ dataButton.onclick = function() {
     let messageFirst = "Начало работы с бд ";
     record.style.color = "red";
     record.innerHTML = messageFirst; 
-    record.appendChild(loader);
+    let theFirstChild = record.firstChild;
+    record.insertBefore(loader, theFirstChild);
 
     if (isEmptyValues) {
         fetch(url, {

@@ -16,9 +16,7 @@
                     <input type="submit" value="Log-in">
                 </form>
             </div>
-            <div class="tab-area" style="display: {{ visibility1 }};">
-                {% include 'main/tabArea.html' %}
-            </div>
+           
             <div class="data-choose-area" style="display: {{ visibility1 }};">
                 {% include 'main/chooseProject.html' %}
             </div>
@@ -30,6 +28,9 @@
                 {% include 'main/usersList.html' %}
                 {% include 'main/controlField.html' %}
             </div>
+        </div>
+        <div class="tab-area" style="display: {{ visibility1 }};">
+            {% include 'main/tabArea.html' %}
         </div>
         <div class="footer_main">
             <div><p id="stateMessage">{{ message }}</p></div>

@@ -183,7 +183,7 @@ input[type=radio]:checked {
     display: none;
     position: absolute;
     left: 0px;
-    top: -20px;
+    top: 7%;
     z-index: 99;
     width: 220px;
     height: 20px;
@@ -199,7 +199,7 @@ input[type=radio]:checked {
     height: 100%;
     border-radius: 3px 3px 0 0;
     border-top: 2px solid rgb(133, 133, 133);
-    margin-right: 10px;
+    margin-right: 15px;
     cursor: pointer;
     background: #ececec;
 }
@@ -213,21 +213,21 @@ input[type=radio]:checked {
 }
 .tab-element::before {
     right: -2px;
-    transform: skew(5deg);
+    transform: skewX(7deg);
     border-radius: 0 5px 0 0;
     border-right: 2px solid rgb(133, 133, 133);
 
 }
 .tab-element::after {
     left: -2px;
-    transform: skew(-5deg);
+    transform: skewX(-7deg);
     border-left: 2px solid rgb(133, 133, 133);
     border-radius: 5px 0 0 0;
 }
 .tab-element:nth-child(1) {
     z-index: 10;
-    height: 105%;
-    border-bottom: transparent;
+    height: 100%;
+    border-bottom: 1px solid #ececec;
 }
 .tab-element:nth-child(2) {
     z-index: 0;

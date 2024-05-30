@@ -1,11 +1,18 @@
 import {fieldLink, dataAllLinks} from "./input.js";
 import {listOfUsers} from "./userListAdd.js";
+import {tabsControl} from "./tabsControl.js"
 
 let dataButton = document.getElementById("new-project");
 let gizmoHTML = document.getElementById("gizmo");
 let newProjectData = document.querySelectorAll(".new-project");
 let record = document.getElementById("stateMessage");
 let programmer = document.querySelectorAll(".select-prog");
+let tabs = document.querySelectorAll(".tab-element");
+
+// document.querySelectorAll(".list_of_notes")[1].classList.add("list_of_notes_no_active");
+// document.querySelectorAll(".list_of_notes")[0].classList.add("list_of_notes_no_active");
+document.querySelectorAll(".tab-element")[1].classList.add("tab-element-active");
+document.querySelectorAll(".tab-element")[0].classList.add("tab-element-no-active");
 let loader = document.createElement('span');
 loader.setAttribute("class", "loader");
 
@@ -109,4 +116,15 @@ dataButton.onclick = function() {
     
     
 }
+
+tabsControl(0, 1);
+
+tabs.forEach((el, index) => {
+    el.onclick = function() {
+        let index1 = index == 1 ? 0: 1;
+        tabsControl(index, index1);
+    }
+});
+
+
 

@@ -62,6 +62,9 @@ body {
     /* overflow: hidden; */
     /* overflow-y: scroll; */
 }
+.list_of_notes_no_active {
+    display: none;
+}
 .login-form {
     display: block;
     height: 40%;

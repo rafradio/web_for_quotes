@@ -2,7 +2,7 @@
 <fieldset class="flex-fieldset" id="old-project" disabled>
     <legend>Данные в БД</legend>
     <input class="db" autocomplete="off" role="combobox" list="" id="{{ id1 }}" name="{{ id1 }}" placeholder="Выберите id" >
-    <datalist class="db-datalist" id="link_data" role="listbox">
+    <datalist class="db-datalist" id="{{ id1|add:"_data" }}" role="listbox">
         {% if data %}
             {% for el in data %}
                 <option value="{{ el.link }}">{{ el.link }}</option>
@@ -10,7 +10,7 @@
         {% endif %}
     </datalist>
     <input class="db" autocomplete="off" role="combobox" list="" id="{{ id2 }}" name="{{ id2 }}" placeholder="Выберите название проекта">
-    <datalist class="db-datalist" id="title_data" role="listbox">
+    <datalist class="db-datalist" id="{{ id2|add:"_data" }}" role="listbox">
         {% if data %}
             {% for el in data %}
                 <option value="{{ el.title }}">{{ el.title }}</option>

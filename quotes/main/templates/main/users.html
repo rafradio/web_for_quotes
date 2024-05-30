@@ -2,7 +2,7 @@
 <fieldset class="flex-fieldset">
     <legend>Пользователи</legend>
     <input class="db" autocomplete="off" role="combobox" list="" id="{{ id3 }}" name="link" placeholder="Выберите имя" >
-    <datalist class="db-datalist" id="user-name-data" role="listbox">
+    <datalist class="db-datalist" id="{{ id3|add:"-data" }}" role="listbox">
         {% if users %}
             {% for el in users %}
                 <option value="{{ el.name }}">{{ el.name }}</option>
@@ -10,12 +10,12 @@
         {% endif %}
     </datalist>
     <input class="db" autocomplete="off" role="combobox" list="" id="{{ id4 }}" name="title" placeholder="Выберите логин">
-    <datalist class="db-datalist" id="user-login-data" role="listbox">
+    <datalist class="db-datalist" id="{{ id4|add:"-data" }}" role="listbox">
         {% if users %}
             {% for el in users %}
                 <option value="{{ el.email }}">{{ el.email }}</option>
             {% endfor %}
         {% endif %}
     </datalist>
-    <div class="button-user" id="addUSer"><p>Добавить пользователя</p></div>
+    <div class="button-user" id="{{ id6 }}"><p>Добавить пользователя</p></div>
 </fieldset>

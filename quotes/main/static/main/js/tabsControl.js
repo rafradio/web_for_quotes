@@ -7,7 +7,47 @@ function tabsControl(index, index1) {
         el.classList.toggle("tab-element-active");
         el.classList.toggle("tab-element-no-active");
     })
-    // tabs[index].classList.toggle("tab-element-active");
+    if (index == 1) deletTeb();
+}
+
+function deletTeb() {
+    let url = new URL(window.location.href);
+    let csrftoken = getCookie('quotes_user');
+    let req = new XMLHttpRequest();
+    req.open('GET', document.location, true);
+    req.send(null);
+    req.onload = function() {
+        var headers = req.getAllResponseHeaders().toLowerCase();
+        console.log(headers);
+    };
+    console.log(csrftoken);
+    // fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             "X-CSRFToken": csrftoken
+    //         },
+    //     })
+    //     .then((response) => {
+    //         console.log("url = ", url);
+    //         console.log("response.headers = ", response.headers.get("Rafael"));
+        
+    //     })
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 export {tabsControl};

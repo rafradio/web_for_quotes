@@ -11,6 +11,7 @@ class LogTemplateView(TemplateView):
     template_name = "main/login.html"
     
     def get(self, request, *args, **kwargs):
+        # request.session['fav_color'] = 'red'
         MyLogger.configure()
         clientip = f'{request.get_full_path()}; {request.headers["User-Agent"]}; {request.method};'
         d = {'clientip': clientip}
@@ -28,6 +29,8 @@ class LogTemplateView(TemplateView):
             'visibility': visibility,
             'visibility1': visibility1,
         }
+        
+        
         return render(request, self.template_name, context)
     
     def post(self, request, *args, **kwargs):
@@ -48,7 +51,9 @@ class LogTemplateView(TemplateView):
         if form.is_valid():
             cd = form.cleaned_data
             testUser = TestUsers.objects.get(email=cd['username'])
-            if cd['password'] == testUser.password: 
+            if cd['password'] == testUser.password:
+                # fav_color = request.session.get('fav_color')
+                # print(fav_color)
                 clientip = f'"Пароль введен верно"; {testUser.name}; {testUser.email}'
                 d = {'clientip': clientip}
                 MyLogger.logger.info('Password entering', extra = d)
@@ -66,12 +71,17 @@ class LogTemplateView(TemplateView):
                     'visibility': visibility,
                     'visibility1': visibility1,
                 }
-                return render(request, self.template_name, context)
+                response = render(request, self.template_name, context)
+                response.delete_cookie('quotes_user', testUser.email)
+                response.headers['Rafael'] = 'no-cache'
+                return response
+                # request.META['HTTP_Rafael'] = 'bar'
+                # return render(request, self.template_name, context)
             else:
                 message = "Пароль введен не правильно"
                 clientip = f'"Пароль введен не правильно"; {testUser.name}; {testUser.email}'
                 d = {'clientip': clientip}
                 MyLogger.logger.info('Password entering', extra = d)
                 context['message'] = message
-        return render(request, self.template_name, context)
+                return render(request, self.template_name, context)
     

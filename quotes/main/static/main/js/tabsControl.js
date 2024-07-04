@@ -1,4 +1,4 @@
-function tabsControl(index, index1) {
+function tabsControl(index, index1, record) {
     let pages = document.querySelectorAll(".list_of_notes");
     let tabs = document.querySelectorAll(".tab-element");
     pages[index1].classList.add("list_of_notes_no_active");
@@ -7,7 +7,12 @@ function tabsControl(index, index1) {
         el.classList.toggle("tab-element-active");
         el.classList.toggle("tab-element-no-active");
     })
-    if (index == 1) deletTeb();
+    if (index == 1) {
+        deletTeb();
+        record.innerHTML = "Вы в режиме удаления записей.";
+    } else {
+        record.innerHTML = "Вы в режиме добавления записей.";
+    }
 }
 
 function deletTeb() {

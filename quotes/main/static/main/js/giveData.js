@@ -1,6 +1,6 @@
 import {fieldLink, dataAllLinks} from "./input.js";
 import {listOfUsers} from "./userListAdd.js";
-import {tabsControl} from "./tabsControl.js"
+import {tabsControl} from "./tabsControl.js";
 
 let dataButton = document.getElementById("new-project");
 let gizmoHTML = document.getElementById("gizmo");
@@ -8,7 +8,9 @@ let newProjectData = document.querySelectorAll(".new-project");
 let record = document.getElementById("stateMessage");
 let programmer = document.querySelectorAll(".select-prog");
 let tabs = document.querySelectorAll(".tab-element");
+let deletInfo = document.getElementById("deleteUSer");
 
+deletInfo.firstChild.innerHTML = "Убрать записи";
 // document.querySelectorAll(".list_of_notes")[1].classList.add("list_of_notes_no_active");
 // document.querySelectorAll(".list_of_notes")[0].classList.add("list_of_notes_no_active");
 document.querySelectorAll(".tab-element")[1].classList.add("tab-element-active");
@@ -117,12 +119,14 @@ dataButton.onclick = function() {
     
 }
 
-tabsControl(0, 1);
+tabsControl(0, 1, record);
 
 tabs.forEach((el, index) => {
     el.onclick = function() {
         let index1 = index == 1 ? 0: 1;
-        tabsControl(index, index1);
+        // let record1 = record;
+        console.log("Проверяем табы = ", record);
+        tabsControl(index, index1, record);
     }
 });
 

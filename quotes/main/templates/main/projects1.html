@@ -1,5 +1,5 @@
 {% load static %}
-<fieldset class="flex-fieldset" id="old-project" disabled>
+<fieldset class="flex-fieldset" id="{{ typepr }}" disabled>
     <legend>Данные в БД</legend>
     <input class="db" autocomplete="off" role="combobox" list="" id="{{ id1 }}" name="{{ id1 }}" placeholder="Выберите id" >
     <datalist class="db-datalist" id="{{ id1|add:"_data" }}" role="listbox">

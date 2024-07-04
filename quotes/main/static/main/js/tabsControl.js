@@ -17,31 +17,42 @@ function tabsControl(index, index1, record) {
 
 function deletTeb() {
     let url = new URL(window.location.href);
-    let csrftoken = getCookie('quotes_user');
+    let csrftoken = getCookie('quota_user_name');
     let req = new XMLHttpRequest();
     req.open('GET', document.location, true);
-    req.send(null);
     req.onload = function() {
         var headers = req.getAllResponseHeaders().toLowerCase();
         console.log(headers);
     };
+    req.setRequestHeader('Access-Control-Allow-Origin', '*');
+    req.send(200);
+    
     console.log(csrftoken);
-    // fetch(url, {
-    //         method: 'POST',
-    //         headers: {
-    //             "X-CSRFToken": csrftoken
-    //         },
-    //     })
-    //     .then((response) => {
-    //         console.log("url = ", url);
-    //         console.log("response.headers = ", response.headers.get("Rafael"));
+    fetch(document.location, {
+            method: 'GET',
+            credentials: 'include'
+            // headers: {
+            //     "X-CSRFToken": csrftoken
+            // },
+        })
+        .then(response => response.headers)
+        .then(data => {
+            console.log("url = ", url);
+            for (const pair of data.entries()) {
+                console.log(`${pair[0]}: ${pair[1]}`);
+            }
+            console.log("cookies  =  ", data);
+            //console.log("response.headers = ", data.get().toString);
+            //console.log("response.coockeis = ", data.text());
+            // console.log("response.headers = ", response.headers.get("Rafael"));
         
-    //     })
+        });
 }
 
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
+        console.log("coockies = ", document.cookie);
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = cookies[i].trim();

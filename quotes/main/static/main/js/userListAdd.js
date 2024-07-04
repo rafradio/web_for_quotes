@@ -4,7 +4,10 @@ let userName = document.getElementById("user-name");
 let buttonDel = document.getElementById("button-del-user");
 let inputRadio = document.querySelectorAll(".radio-button");
 let oldProject = document.getElementById("old-project");
+let delProject = document.getElementById("old-project-del");
 let newProject = document.querySelectorAll(".new-project");
+
+delProject.disabled = false;
 
 buttonForUser.onclick = () => {
     let text = userName.value;

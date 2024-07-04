@@ -71,8 +71,10 @@ class LogTemplateView(TemplateView):
                     'visibility': visibility,
                     'visibility1': visibility1,
                 }
+                
                 response = render(request, self.template_name, context)
-                response.delete_cookie('quotes_user', testUser.email)
+                response.set_cookie('quota_user_name', testUser.email)
+                # response.delete_cookie('quotes_user', testUser.email)
                 response.headers['Rafael'] = 'no-cache'
                 return response
                 # request.META['HTTP_Rafael'] = 'bar'

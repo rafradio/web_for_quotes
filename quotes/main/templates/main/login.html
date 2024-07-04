@@ -11,12 +11,12 @@
             {% include 'main/tabArea.html' %}
         </div>
         <div class="list_of_notes">
-            {% with id1='link' id2='title' id3='user-name' id4='user-login' id5='button-del-user' id6='addUSer' %}
+            {% with id1='link' id2='title' id3='user-name' id4='user-login' id5='button-del-user' id6='addUSer' typepr='old-project' %}
             {% include 'main/addProject.html' %}
             {% endwith %}
         </div>
         <div class="list_of_notes">
-            {% with id1='link-Del' id2='title-Del' id3='user-name-Del' id4='user-login-Del' id6='deleteUSer' %}
+            {% with id1='link-Del' id2='title-Del' id3='user-name-Del' id4='user-login-Del' id6='deleteUSer' typepr='old-project-del' %}
             {% include 'main/deleteProject.html' %}
             {% endwith %}
         </div>
